@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 project(hiprand_package_test CXX)
 
 # CMake modules
-list(APPEND CMAKE_PREFIX_PATH ${ROCM_PATH} ${ROCM_PATH}/hip)
+list(APPEND CMAKE_PREFIX_PATH $ENV{ROCM_PATH} $ENV{ROCM_PATH}/hip)
 list(APPEND CMAKE_MODULE_PATH
     ${HIP_DIR}/cmake ${ROCM_PATH}/hip/cmake # FindHIP.cmake
 )
@@ -16,7 +16,7 @@ if (BUILD_WITH_LIB STREQUAL "CUDA")
         find_package(HIP REQUIRED)
     endif()
 else()
-  find_package(hip REQUIRED CONFIG PATHS ${ROCM_PATH})
+  find_package(hip REQUIRED CONFIG PATHS $ENV{ROCM_PATH})
 endif()
 
 # Get HIP options
@@ -39,7 +39,7 @@ if (BUILD_WITH_LIB STREQUAL "CUDA")
 endif()
 
 # Find hipRAND
-find_package(hiprand REQUIRED CONFIG HINTS ${hiprand_DIR} PATHS "${ROCM_PATH}/hiprand")
+find_package(hiprand REQUIRED CONFIG HINTS ${hiprand_DIR} PATHS "$ENV{ROCM_PATH}/hiprand")
 
 # TODO: Fix fortran wrapper
 # Check if Fortran wrapper is installed
@@ -100,5 +100,5 @@ foreach(test_src ${hiprand_pkg_TEST_SRCS})
       foreach( file_i ${third_party_dlls})
         add_custom_command( TARGET ${test_name} POST_BUILD COMMAND ${CMAKE_COMMAND} ARGS -E copy_if_different ${file_i} ${PROJECT_BINARY_DIR}/test/package )
       endforeach( file_i )
-    endif()         
+    endif()
 endforeach()
