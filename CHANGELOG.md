@@ -29,7 +29,7 @@ Documentation for hipRAND is available at
 
 ### Fixes
 
-* Fixed an issue in `rmake.py` where the list storing cmake options would contain individual characters instead of full string of option
+* Fixed an issue in `rmake.py` where the list storing cmake options would contain individual characters instead of a full string of options.
 * Build error when using Clang++ directly due to unsupported references to `amdgpu-target`
 
 ## hipRAND-2.10.17 for ROCm 5.6.0
