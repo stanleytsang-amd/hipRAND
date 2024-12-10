@@ -5,7 +5,7 @@ Documentation for hipRAND is available at
 
 ## hipRAND-2.11.1 for ROCm 6.2.4
 
-### Additions
+### Added
 
 * GFX1151 Suport
 
